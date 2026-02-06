@@ -315,7 +315,7 @@ Please classify these items according to CRR requirements."""
             if not df_details.empty:
                 st.dataframe(
                     df_details,
-                    width='stretch',
+                    use_container_width=True,
                     height=400
                 )
             else:
@@ -328,7 +328,7 @@ Please classify these items according to CRR requirements."""
             # Format values as currency
             st.dataframe(
                 df_template.style.format("{:,.0f}"),
-                width='stretch'
+                use_container_width=True
             )
         
         with tab3:
