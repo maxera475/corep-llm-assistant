@@ -44,12 +44,16 @@ class COREPReasoner:
             )
         
         genai.configure(api_key=self.api_key)
+        
+        # Create generation config (response_mime_type requires google-generativeai>=0.8.0)
+        generation_config = genai.GenerationConfig(
+            temperature=temperature,
+            response_mime_type="application/json"
+        )
+        
         self.model = genai.GenerativeModel(
             model_name=model,
-            generation_config={
-                "temperature": temperature,
-                "response_mime_type": "application/json"
-            }
+            generation_config=generation_config
         )
         self.model_name = model
         self.temperature = temperature
