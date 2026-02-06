@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  corep-assistant:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: corep-assistant
+    ports:
+      - "8501:8501"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-1.5-pro}
+      - GEMINI_TEMPERATURE=${GEMINI_TEMPERATURE:-0.1}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-all-MiniLM-L6-v2}
+    volumes:
+      # Persist data, exports, and logs
+      - ./data:/app/data
+      - ./exports:/app/exports
+      - ./audit_logs:/app/audit_logs
+      # Optional: Mount Input_files if you want to rebuild index
+      - ../Input_files:/app/Input_files:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - corep-network
+
+networks:
+  corep-network:
+    driver: bridge
