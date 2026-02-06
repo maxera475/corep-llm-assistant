@@ -29,10 +29,29 @@ pip install -r requirements.txt
 
 ### 3. Configuration
 
-Create a `.env` file in the root directory:
-```
-GOOGLE_API_KEY=your_google_api_key_here
-```
+**Important:** You need your own Google Gemini API key. This is free to get!
+
+1. **Get your API key:**
+   - Visit: https://makersuite.google.com/app/apikey
+   - Sign in with Google account
+   - Click "Create API Key"
+   - Copy your key
+
+2. **Configure the app:**
+   ```bash
+   # Copy the example file
+   cp .env.example .env
+   
+   # Windows:
+   copy .env.example .env
+   ```
+
+3. **Edit `.env` and add your key:**
+   ```
+   GOOGLE_API_KEY=your_actual_api_key_here
+   ```
+
+⚠️ **Security Note:** Never commit `.env` to git - it's already in `.gitignore`
 
 ### 4. Initialize the System
 

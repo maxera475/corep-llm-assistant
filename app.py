@@ -211,10 +211,10 @@ Please classify these items according to CRR requirements."""
     col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 4])
     
     with col_btn1:
-        run_button = st.button("🚀 Run Analysis", type="primary", width='stretch')
+        run_button = st.button("🚀 Run Analysis", type="primary", use_container_width=True)
     
     with col_btn2:
-        clear_button = st.button("🗑️ Clear", width='stretch')
+        clear_button = st.button("🗑️ Clear", use_container_width=True)
     
     if clear_button:
         st.session_state.analysis_result = None
@@ -396,7 +396,7 @@ Please classify these items according to CRR requirements."""
         
         with col1:
             # Export to Excel
-            if st.button("📥 Download Excel Report", width='stretch'):
+            if st.button("📥 Download Excel Report", use_container_width=True):
                 try:
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                     filename = f"corep_report_{timestamp}.xlsx"
@@ -414,7 +414,7 @@ Please classify these items according to CRR requirements."""
                             data=f,
                             file_name=filename,
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                            width='stretch'
+                            use_container_width=True
                         )
                     
                     st.success(f"✅ Excel file created: {filename}")
@@ -424,7 +424,7 @@ Please classify these items according to CRR requirements."""
         
         with col2:
             # Export audit log
-            if st.button("📄 Download Audit Log", width='stretch'):
+            if st.button("📄 Download Audit Log", use_container_width=True):
                 if st.session_state.audit_logger:
                     try:
                         log_path = st.session_state.audit_logger.save_log()
@@ -435,7 +435,7 @@ Please classify these items according to CRR requirements."""
                                 data=f.read(),
                                 file_name=Path(log_path).name,
                                 mime="application/json",
-                                width='stretch'
+                                use_container_width=True
                             )
                         
                         st.success(f"✅ Audit log saved")
@@ -445,14 +445,14 @@ Please classify these items according to CRR requirements."""
         
         with col3:
             # Export JSON
-            if st.button("📋 Download Analysis JSON", width='stretch'):
+            if st.button("📋 Download Analysis JSON", use_container_width=True):
                 json_str = json.dumps(analysis, indent=2)
                 st.download_button(
                     label="📥 Download JSON",
                     data=json_str,
                     file_name=f"analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
                     mime="application/json",
-                    width='stretch'
+                    use_container_width=True
                 )
 
 

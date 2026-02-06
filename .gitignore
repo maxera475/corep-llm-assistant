@@ -44,9 +44,9 @@ env/
 .DS_Store
 
 # Data files
-data/
-*.faiss
-*.pkl
+# data/ - Commented out to include FAISS index for Streamlit Cloud deployment
+# *.faiss - Commented out to include FAISS index for Streamlit Cloud deployment
+# *.pkl - Commented out to include metadata for Streamlit Cloud deployment
 *.h5
 
 # Output files
